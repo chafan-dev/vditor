@@ -140,7 +140,7 @@ describe("Options", () => {
                 emoji: {
                     "+1": "👍",
                 },
-                emojiPath: "https://cdn.jsdelivr.net/npm/vditor@version/dist/images/emoji",
+                emojiPath: "https://cdn.jsdelivr.net/npm/@chafan/vditor@version/dist/images/emoji",
                 emojiTail: "前往设置",
             },
         });

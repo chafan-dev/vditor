@@ -7,7 +7,7 @@ import {getMarkdown} from "../markdown/getMarkdown";
 import {graphvizRender} from "../markdown/graphvizRender";
 import {highlightRender} from "../markdown/highlightRender";
 import {mathRender} from "../markdown/mathRender";
-import {mediaRender} from "../markdown/mediaRender";
+// import {mediaRender} from "../markdown/mediaRender";
 import {mermaidRender} from "../markdown/mermaidRender";
 import {mindmapRender} from "../markdown/mindmapRender";
 import {plantumlRender} from "../markdown/plantumlRender";
@@ -217,7 +217,7 @@ export class Preview {
         mindmapRender(vditor.preview.element.lastElementChild as HTMLElement, vditor.options.cdn, vditor.options.theme);
         plantumlRender(vditor.preview.element.lastElementChild as HTMLElement, vditor.options.cdn);
         abcRender(vditor.preview.element.lastElementChild as HTMLElement, vditor.options.cdn);
-        mediaRender(vditor.preview.element.lastElementChild as HTMLElement);
+        // mediaRender(vditor.preview.element.lastElementChild as HTMLElement);
         // toc render
         const editorElement = vditor.preview.element;
         let tocHTML = vditor.outline.render(vditor);

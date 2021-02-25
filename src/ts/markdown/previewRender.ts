@@ -12,7 +12,7 @@ import {graphvizRender} from "./graphvizRender";
 import {highlightRender} from "./highlightRender";
 import {lazyLoadImageRender} from "./lazyLoadImageRender";
 import {mathRender} from "./mathRender";
-import {mediaRender} from "./mediaRender";
+// import {mediaRender} from "./mediaRender";
 import {mermaidRender} from "./mermaidRender";
 import {mindmapRender} from "./mindmapRender";
 import {plantumlRender} from "./plantumlRender";
@@ -97,7 +97,7 @@ export const previewRender = async (previewElement: HTMLDivElement, markdown: st
     mindmapRender(previewElement, mergedOptions.cdn, mergedOptions.mode);
     plantumlRender(previewElement, mergedOptions.cdn);
     abcRender(previewElement, mergedOptions.cdn);
-    mediaRender(previewElement);
+    // mediaRender(previewElement);
     if (mergedOptions.speech.enable) {
         speechRender(previewElement, mergedOptions.lang);
     }
