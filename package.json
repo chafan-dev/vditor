@@ -51,9 +51,9 @@
     "webpack-dev-server": "^3.11.0"
   },
   "license": "MIT",
-  "repository": "git://github.com/Vanessa219/vditor.git",
+  "repository": "git://github.com/chafan-dev/vditor.git",
   "bugs": {
-    "url": "https://github.com/Vanessa219/vditor/issues"
+    "url": "https://github.com/chafan-dev/vditor/issues"
   },
   "scripts": {
     "lint": "tslint --fix -c tslint.json '{src,types}/**/*.ts'",
