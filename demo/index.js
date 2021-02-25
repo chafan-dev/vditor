@@ -50,11 +50,10 @@ if (window.innerWidth < 768) {
 }
 
 window.vditor = new Vditor('vditor', {
-  _lutePath: `http://192.168.0.107:9090/lute.min.js?${new Date().getTime()}`,
-  // _lutePath: 'src/js/lute/lute.min.js',
+  _lutePath: 'src/js/lute/lute.min.js',
   toolbar,
   mode: 'wysiwyg',
-  height: window.innerHeight + 100,
+  height: 300,
   outline: {
     enable: true,
     position: 'right',
@@ -81,7 +80,7 @@ window.vditor = new Vditor('vditor', {
     type: 'text',
   },
   hint: {
-    emojiPath: 'https://cdn.jsdelivr.net/npm/vditor@1.8.3/dist/images/emoji',
+    emojiPath: 'https://cdn.jsdelivr.net/npm/@chafan/vditor@1.8.3/dist/images/emoji',
     emojiTail: '<a href="https://ld246.com/settings/function" target="_blank">设置常用表情</a>',
     emoji: {
       'sd': '💔',
@@ -128,5 +127,19 @@ window.vditor = new Vditor('vditor', {
         replace(/[\?\\/:|<>\*\[\]\(\)\$%\{\}@~]/g, '').
         replace('/\\s/g', '')
     },
+  },
+})
+
+window.simpleEditor = new Vditor("chafan-simple-editor", {
+  toolbarConfig: {
+    hide: true,
+  },
+  _lutePath: 'src/js/lute/lute.min.js',
+  mode: 'wysiwyg',
+  cache: {
+      enable: false,
+  },
+  counter: {
+      enable: false,
   },
 })

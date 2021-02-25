@@ -22,7 +22,7 @@ export abstract class Constants {
         "makefile", "markdown", "nginx", "objectivec", "php", "perl", "properties", "python", "ruby", "sql", "shell",
         "dart", "erb", "go", "gradle", "julia", "kotlin", "less", "lua", "matlab", "rust", "scss", "typescript", "ts",
         "yaml"];
-    public static readonly CDN = `https://cdn.jsdelivr.net/npm/vditor@${VDITOR_VERSION}`;
+    public static readonly CDN = `https://cdn.jsdelivr.net/npm/@chafan/vditor@${VDITOR_VERSION}`;
     public static readonly MARKDOWN_OPTIONS = {
         autoSpace: false,
         codeBlockPreview: true,

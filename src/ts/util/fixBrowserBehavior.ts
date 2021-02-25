@@ -26,6 +26,47 @@ import {
     setRangeByWbr,
     setSelectionByPosition, setSelectionFocus,
 } from "./selection";
+import sanitizeHtml from 'sanitize-html';
+
+function sanitizeHtmlPaste(code: string) {
+    return sanitizeHtml(code, {
+        allowedTags: [
+            // "address", "article", "aside", "footer", "header",
+            // "hgroup", "main", "nav", "section",
+            "h1", "h2", "h3", "h4", "h5", "h6",
+            "blockquote",
+            "dd", "div", "dl", "dt",
+            "figcaption", "figure", "hr", "li",
+            "ol", "p", "pre", "ul", "a", "abbr", "b",
+            "bdi", "bdo", "br", "cite", "code",
+            "data", "dfn",
+            "em", "i", "kbd", "mark", "q",
+            // "rb", "rtc", // NOTE: deprecated
+            "rp", "rt", "ruby", "s", "samp",
+            "small", "span", "strong", "sub", "sup", "time", "u", "var", "wbr", "caption",
+            "col", "colgroup", "table", "tbody", "td", "tfoot", "th", "thead", "tr"
+        ],
+        disallowedTagsMode: 'discard',
+        allowedAttributes: {
+            a: [ 'href', 'name', 'target' ],
+            // We don't currently allow img itself by default, but this
+            // would make sense if we did. You could add srcset here,
+            // and if you do the URL is checked for safety
+            img: [ 'src' ]
+        },
+        // Lots of these won't come up by default because we don't allow them
+        //   selfClosing: [ 'img', 'br', 'hr', 'area', 'base', 'basefont', 'input', 'link', 'meta' ],
+        // URL schemes we permit
+        allowedSchemes: [
+            'http', 'https',
+            // 'ftp', 'mailto', 'tel'
+        ],
+        // allowedSchemesByTag: {},
+        allowedSchemesAppliedToAttributes: [ 'href', 'src', 'cite' ],
+        // allowProtocolRelative: true,
+        // enforceHtmlBoundary: false
+    });
+}
 
 // https://github.com/Vanessa219/vditor/issues/508 软键盘无法删除空块
 export const fixGSKeyBackspace = (event: KeyboardEvent, vditor: IVditor, startContainer: Node) => {
@@ -1182,6 +1223,8 @@ export const fixTask = (vditor: IVditor, range: Range, event: KeyboardEvent) => 
     return false;
 };
 
+export const URLRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}(\.[a-zA-Z0-9()]{1,6})?\b([-a-zA-Z0-9()@:,%_\+.~#?&//=]*)/gi;
+
 export const fixDelete = (vditor: IVditor, range: Range, event: KeyboardEvent, pElement: HTMLElement | false) => {
     if (range.startContainer.nodeType !== 3) {
         // 光标位于 hr 前，hr 前有内容
@@ -1385,7 +1428,7 @@ export const paste = async (vditor: IVditor, event: (ClipboardEvent | DragEvent)
     } else {
         if (textHTML.trim() !== "") {
             const tempElement = document.createElement("div");
-            tempElement.innerHTML = textHTML;
+            tempElement.innerHTML = sanitizeHtmlPaste(textHTML);
             tempElement.querySelectorAll("[style]").forEach((e) => {
                 e.removeAttribute("style");
             });
@@ -1409,6 +1452,7 @@ export const paste = async (vditor: IVditor, event: (ClipboardEvent | DragEvent)
         } else if (files.length > 0 && vditor.options.upload.url) {
             await uploadFiles(vditor, files);
         } else if (textPlain.trim() !== "" && files.length === 0) {
+            textPlain = textPlain.replaceAll(URLRegex, (x) => `<a href="${x}" target="_blank">${x}</a>`)
             if (vditor.currentMode === "ir") {
                 renderers.Md2VditorIRDOM = {renderLinkDest};
                 vditor.lute.SetJSRenderers({renderers});

@@ -1,6 +1,6 @@
 {
-  "name": "vditor",
-  "version": "3.8.2",
+  "name": "@chafan/vditor",
+  "version": "3.8.2-chafan.1",
   "description": "♏ 易于使用的 Markdown 编辑器，为适配不同的应用场景而生",
   "author": "Vanessa <v@b3log.org> (http://vanessa.b3log.org)",
   "homepage": "https://b3log.org/vditor",
@@ -15,7 +15,8 @@
     "src/assets/*"
   ],
   "dependencies": {
-    "diff-match-patch": "^1.0.5"
+    "diff-match-patch": "^1.0.5",
+    "sanitize-html": "^2.3.2"
   },
   "types": "dist/index.d.ts",
   "devDependencies": {
@@ -24,6 +25,7 @@
     "@types/diff-match-patch": "^1.0.32",
     "@types/jest": "^26.0.19",
     "@types/puppeteer": "^2.1.1",
+    "@types/sanitize-html": "^1.27.1",
     "autoprefixer": "^9.8.4",
     "babel-loader": "^8.1.0",
     "copy-webpack-plugin": "^6.0.3",
@@ -51,9 +53,9 @@
     "webpack-dev-server": "^3.11.0"
   },
   "license": "MIT",
-  "repository": "git://github.com/Vanessa219/vditor.git",
+  "repository": "git://github.com/chafan-dev/vditor.git",
   "bugs": {
-    "url": "https://github.com/Vanessa219/vditor/issues"
+    "url": "https://github.com/chafan-dev/vditor/issues"
   },
   "scripts": {
     "lint": "tslint --fix -c tslint.json '{src,types}/**/*.ts'",
