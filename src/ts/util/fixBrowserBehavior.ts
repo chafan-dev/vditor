@@ -1223,8 +1223,6 @@ export const fixTask = (vditor: IVditor, range: Range, event: KeyboardEvent) => 
     return false;
 };
 
-export const URLRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}(\.[a-zA-Z0-9()]{1,6})?\b([-a-zA-Z0-9()@:,%_\+.~#?&//=]*)/gi;
-
 export const fixDelete = (vditor: IVditor, range: Range, event: KeyboardEvent, pElement: HTMLElement | false) => {
     if (range.startContainer.nodeType !== 3) {
         // 光标位于 hr 前，hr 前有内容
@@ -1452,7 +1450,6 @@ export const paste = async (vditor: IVditor, event: (ClipboardEvent | DragEvent)
         } else if (files.length > 0 && vditor.options.upload.url) {
             await uploadFiles(vditor, files);
         } else if (textPlain.trim() !== "" && files.length === 0) {
-            textPlain = textPlain.replaceAll(URLRegex, (x) => `<a href="${x}" target="_blank">${x}</a>`)
             if (vditor.currentMode === "ir") {
                 renderers.Md2VditorIRDOM = {renderLinkDest};
                 vditor.lute.SetJSRenderers({renderers});
